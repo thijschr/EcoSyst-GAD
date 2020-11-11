@@ -1,0 +1,9 @@
+---
+title: "EcoSyst - Typification og generalised species datasets"
+Author: Thijs Christiaan van Son and Olav Skarpaas
+output: 
+  html_notebook: 
+    toc: yes
+---
+
+
