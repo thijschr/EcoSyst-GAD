@@ -1,0 +1,8 @@
+---
+title: "EcoSyst - Typification functions"
+Author: Thijs Christiaan van Son and Olav Skarpaas
+output: 
+  html_notebook: 
+    toc: yes
+---
+
