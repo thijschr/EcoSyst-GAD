@@ -6,4 +6,17 @@ output:
     toc: yes
 ---
 
+## Background
+The code documents and illustrates the steps from data to type division
+along a local environmental complex variable (LEC).
+
+
+### Packages and source files
+```{r}
+library(raster)
+# library(fields)
+library(vegan)
+
+source("../R/typification_functions.r")
+```
 
