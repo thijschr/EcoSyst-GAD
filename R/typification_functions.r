@@ -16,7 +16,7 @@ sim.sp <- function(lce.len = 100,      # length of lce
   sp.mn2 <- sort(runif(nsp,
                        quantile(lce, 0.25),
                        quantile(lce, 0.75)))
-  sp.mn3 <- floor(max(len) / nsp) * (1:nsp)
+  sp.mn3 <- floor(max(lce) / nsp) * (1:nsp)
   
   ## SD of species distributions along the LCE
   sp.sd1 <- rep(max(lce) / 10, nsp) 
@@ -28,9 +28,9 @@ sim.sp <- function(lce.len = 100,      # length of lce
                   max(lce) / 3)
   
   ## Simulated abundance along LCE (rows) for each species (cols)
-  sp.abun <- mapply(dnorm, 
+  sp.abun <- mapply(dnorm,
                     mean = sp.mn1,
                     sd = sp.sd1,
-                    MoreArgs = list(lce = lce))
+                    MoreArgs = list(x = lce))
   sp.abun
 }
