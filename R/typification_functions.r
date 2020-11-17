@@ -34,20 +34,32 @@ sim.sp <- function(lcelen = 100,      # length of lce
 
 
 ## Plot simulated species
-plt.sim.sp <- function(n.sp = 10,      # Number of simulated species
-                       sim.abun)        # Simulated abundances
+plt.sim.sp <- function(nsp = 10,       # Number of simulated species
+                       simabun)        # Simulated abundances
 {
   ## Defining species colours
-  sp.col <- tim.colors(n.sp)
+  sp.col <- tim.colors(nsp)
   par(mfrow = c(1, 1))
   par(mar = c(2, 2, 1, 1),
       mgp = c(0.5, 0.5, 0))
-  plot()
+  plot(simabun,
+       type = "n",
+       bty = "l",
+       xaxt = "n",
+       yaxt = "n",
+       ylim = c(0, 1.4 * max(simabun)),
+       xlab = "Key source of variation (local complex-variable",
+       ylab = "Key characteristic")
+  for(i in 1:snp) 
+  {
+    lines(simabun[, i],
+          col.sp = sp.col[i])
+  }
 }
 
-sp.col <- tim.colors(n.sp)
-par(mfrow=c(1,1))
-par(mar=c(2,2,1,1),mgp=c(0.5,0.5,0))
-plot(y1[,1],type="l",bty="l",xaxt="n",yaxt="n",ylim=c(0,1.4*max(y1)),col=sp.col[1],
-     xlab="Key source of variation (complex-variable)",ylab="Key characteristic")
-for(i in 2:n.sp) lines(y1[,i],col=sp.col[i])
+# sp.col <- tim.colors(n.sp)
+# par(mfrow=c(1,1))
+# par(mar=c(2,2,1,1),mgp=c(0.5,0.5,0))
+# plot(y1[,1],type="l",bty="l",xaxt="n",yaxt="n",ylim=c(0,1.4*max(y1)),col=sp.col[1],
+#      xlab="Key source of variation (complex-variable)",ylab="Key characteristic")
+# for(i in 2:n.sp) lines(y1[,i],col=sp.col[i])
