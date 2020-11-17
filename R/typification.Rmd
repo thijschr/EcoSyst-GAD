@@ -12,11 +12,30 @@ along a local environmental complex variable (LEC).
 
 
 ### Packages and source files
-```{r}
+```{r, message=FALSE}
 library(raster)
-# library(fields)
+library(fields)
 library(vegan)
 
 source("../R/typification_functions.r")
+```
+
+
+### Simulating species
+```{r}
+## Generating simulate species
+sim_species <- sim.sp()
+
+## Plotting simulated species densities
+sp.col <- tim.colors(n = ncol(sim_species$sp_abun))
+matplot(sim_species$sp_abun,
+        type = "l",
+        lty = 1,
+        col = sp.col,
+        xaxt = "n",
+        yaxt = "n",
+        ylim = c(0, 1.2 * max(sim_species$sp_abun)),
+        xlab = "Key source of variation (local complex-variable",
+        ylab = "Key characteristic")
 ```
 
