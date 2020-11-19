@@ -14,28 +14,61 @@ along a local environmental complex variable (LEC).
 ### Packages and source files
 ```{r, message=FALSE}
 library(raster)
-library(fields)
+# library(fields)
 library(vegan)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(tibble)
+
 
 source("../R/typification_functions.r")
 ```
 
 
 ### Simulating species
+Could be worth checking out the "Virtual species" package for simulation of species.
+For the current method, it seems the area under the curve always sums to one ...
+Set a random seed?
 ```{r}
-## Generating simulate species
-sim_species <- sim.sp()
+# Generating simulate species
+sim_species <- sim_sp()
 
-## Plotting simulated species densities
-sp.col <- tim.colors(n = ncol(sim_species$sp_abun))
-matplot(sim_species$sp_abun,
-        type = "l",
-        lty = 1,
-        col = sp.col,
-        xaxt = "n",
-        yaxt = "n",
-        ylim = c(0, 1.2 * max(sim_species$sp_abun)),
-        xlab = "Key source of variation (local complex-variable",
-        ylab = "Key characteristic")
+# Need to prepare data for plotting with ggplot
+sim_species_lf <- as.data.frame(sim_species$sp_abun) %>% 
+  gather(key = "species", value = "dens") %>% 
+  add_column(lce = rep(1:100, 10))
+
+# Plotting to show simulated species densities
+pl <- ggplot(sim_species_lf, aes(x = lce, y = dens)) +
+  geom_line(aes(colour = species)) +
+  coord_cartesian(ylim = c(0, 1.4*max(sim_species_lf$dens))) +
+  theme(legend.position = "none",
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank()) +
+  labs(x = "Key source of variation (local complex-variable)",
+       y = "Key characteristic") 
+pl
+```
+
+
+### Typification procedure
+
+#### Hypothetical observations
+Working with the simulated species abundance along a single LCE. 
+Our hypothesis is that there are X types distributed evenly along the LCE.
+```{r}
+num_obs <- 15
+
+# Hypothesis: Observation points of X candidate types, evenly distributed along the LCE
+obs_pts <- round((1:num_obs) * 100 / (num_obs + 1), 0)
+
+
+# Plotting
+for (i in 1:num_obs) {
+  text(obs_pts[i], 1.4*max(sim_species$sp_abun), i,
+       add = TRUE)
+}
 ```
 
