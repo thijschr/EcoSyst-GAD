@@ -73,3 +73,10 @@ pl <- pl + annotate(geom = "text",
 pl
 ```
 
+
+### Generalised species lists
+```{r}
+gads <- gen_sp_lst(simabun = sim_species$sp_abun)
+head(gads)
+```
+
