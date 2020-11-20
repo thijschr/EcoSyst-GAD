@@ -66,9 +66,10 @@ obs_pts <- round((1:num_obs) * 100 / (num_obs + 1), 0)
 
 
 # Plotting
-for (i in 1:num_obs) {
-  text(obs_pts[i], 1.4*max(sim_species$sp_abun), i,
-       add = TRUE)
-}
+pl <- pl + annotate(geom = "text",
+              x = obs_pts, 
+              y = 1.4*max(sim_species_lf$dens),
+              label = 1:num_obs)
+pl
 ```
 
